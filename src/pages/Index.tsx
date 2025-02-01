@@ -63,7 +63,7 @@ const Index = () => {
     timezone: "",
   });
 
-  const totalSteps = 7; // Welcome, 5 sections, and Thank you
+  const totalSteps = 7;
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -80,6 +80,12 @@ const Index = () => {
 
   const handleBack = () => {
     setStep(prev => Math.max(0, prev - 1));
+  };
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    // Handle form submission here
+    handleNext();
   };
 
   const WelcomeScreen = () => (
@@ -108,7 +114,7 @@ const Index = () => {
     >
       <h2 className="form-heading">Understanding Your Needs</h2>
       
-      <div className="space-y-4">
+      <form onSubmit={handleSubmit} className="space-y-4">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div className="space-y-2">
             <Label htmlFor="name">What's your name?</Label>
@@ -118,6 +124,7 @@ const Index = () => {
               value={formData.name}
               onChange={handleInputChange}
               placeholder="Your full name"
+              required
             />
           </div>
           <div className="space-y-2">
@@ -128,6 +135,7 @@ const Index = () => {
               value={formData.organization}
               onChange={handleInputChange}
               placeholder="Your organization name"
+              required
             />
           </div>
         </div>
@@ -140,6 +148,7 @@ const Index = () => {
             value={formData.industry}
             onChange={handleInputChange}
             placeholder="e.g., Technology, Healthcare, Education"
+            required
           />
         </div>
 
@@ -184,22 +193,23 @@ const Index = () => {
             ))}
           </div>
         </div>
-      </div>
 
-      <div className="flex justify-between pt-8">
-        <Button
-          onClick={handleBack}
-          variant="outline"
-        >
-          Back
-        </Button>
-        <Button
-          onClick={handleNext}
-          className="next-button"
-        >
-          Next step
-        </Button>
-      </div>
+        <div className="flex justify-between pt-8">
+          <Button
+            type="button"
+            onClick={handleBack}
+            variant="outline"
+          >
+            Back
+          </Button>
+          <Button
+            type="submit"
+            className="next-button"
+          >
+            Next step
+          </Button>
+        </div>
+      </form>
     </motion.div>
   );
 
