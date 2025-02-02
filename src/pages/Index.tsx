@@ -67,25 +67,25 @@ const Index = () => {
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
-    setFormData((prevData) => ({
+    setFormData(prevData => ({
       ...prevData,
-      [name]: value,
+      [name]: value
     }));
   };
 
   const handleOptionSelect = (field: string, value: string) => {
-    setFormData((prevData) => ({
+    setFormData(prevData => ({
       ...prevData,
-      [field]: value,
+      [field]: value
     }));
   };
 
   const handleNext = () => {
-    setStep((prev) => prev + 1);
+    setStep(prev => prev + 1);
   };
 
   const handleBack = () => {
-    setStep((prev) => Math.max(0, prev - 1));
+    setStep(prev => Math.max(0, prev - 1));
   };
 
   const handleSubmit = (e: React.FormEvent) => {
